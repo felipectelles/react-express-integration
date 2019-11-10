@@ -13,18 +13,16 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Preventing DOS Attacks
+// Preventing DOS Attack
 // limit the body payload using body-parser
 app.use(express.json({ limit: '100kb'})) // Body limit is 100
 
-// express feature -> express-rate-limit dependency
-// npm install express-rate-limit --save
-// setting maximum amount of requests
-// after user uses all of his requests,
-// lock him out for certain amount of time
+// Preventing DOS Attack
+// limit number of request per user
+// dependency: express-rate-limit
 const limit = rateLimit({
     max: 100,// max requests
-    windowMs: 60 * 60 * 1000, // 1 Hour
+    windowMs: 60 * 60 * 1000, // 1 Hour locked after get maximum amount of requests
     message: 'Too many requests' // message to send
 });
 app.use("/players", limit);
