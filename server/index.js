@@ -10,6 +10,7 @@ const port = process.env.PORT || 3001;
 
 app.use(logger('dev'));
 app.use(cors());
+app.use(express.json({ limit: '100kb'}))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
